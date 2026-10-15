@@ -19,8 +19,14 @@ jobs:
       - name: Build
         uses: ./.github/actions/build
 
+      - name: Install Inno Setup
+        uses: crazy-max/ghaction-chocolatey@v3
+        with:
+          args: install innosetup
+
       - name: Package
-        uses: ./.github/actions/package
+        shell: pwsh
+        run: iscc Installer\installer.iss
 
       - name: Upload Installer
         uses: actions/upload-artifact@v4
@@ -36,5 +42,6 @@ jobs:
           body: |
             Сборка TiXL с поддержкой русского языка интерфейса.
             Включение: Settings → Interface → Language → «Русский».
+            Ставится отдельно от официального TiXL (своя папка, свои настройки и проекты в TiXL4.x-RU).
           files: Installer\Output\*.exe
           prerelease: true

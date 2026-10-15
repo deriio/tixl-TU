@@ -5,7 +5,7 @@
 #expr Exec("powershell", "-ExecutionPolicy Bypass -File build-release.ps1", ".", 1, SW_SHOW)
 
 #define MyAppVersion "4.3.0.2"
-#define MyAppName "TiXL-v4.3.0.2"
+#define MyAppName "TiXL-RU-v4.3.0.2"
 #define MyAppPublisher "TiXL Community"
 #define MyAppURL "https://tixl.app//"
 #define MyAppExeName "TiXL.exe"
@@ -14,14 +14,15 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId=t3.tixl
+; Separate id so this Russian-UI build installs side by side with the official TiXL.
+AppId=t3.tixl.ru
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={autopf}\TiXL\TiXL {#MyAppVersion}
+DefaultDirName={autopf}\TiXL-RU\TiXL-RU {#MyAppVersion}
 UsePreviousAppDir=no 
 
 ; "ArchitecturesAllowed=x64compatible" specifies that Setup cannot run
@@ -38,7 +39,7 @@ DisableProgramGroupPage=yes
 ;PrivilegesRequired=lowest
 
 OutputDir=.\Output
-OutputBaseFilename=Tixl-v{#MyAppVersion}
+OutputBaseFilename=Tixl-RU-v{#MyAppVersion}
 SetupIconFile=..\EditorResources\images\t3.ico 
 Compression=lzma
 SolidCompression=yes
@@ -59,7 +60,7 @@ Source: "..\Operators\Lib\.meta\*";      DestDir: "{app}\Operators\Lib\.meta";  
 Source: "..\Operators\Examples\.meta\*"; DestDir: "{app}\Operators\Examples\.meta"; Excludes: "*.proxy.mov,*.waveform.png,*.waveform.jpg,win-x86,win-arm64,osx*,linux-*,android*,ios,maccatalyst-*,unix"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "dependencies\downloads\{#DotNetSdkInstaller}"; DestDir: "{tmp}"; Flags: deleteafterinstall
 Source: "dependencies\downloads\VC_redist.x64.exe"; DestDir: "{tmp}"; Flags: deleteafterinstall
-Source: "..\.Defaults\Tests\*"; DestDir: "{userappdata}\TiXL\Tests"; Excludes: "*.proxy.mov,*.waveform.png,*.waveform.jpg,win-x86,win-arm64,osx*,linux-*,android*,ios,maccatalyst-*,unix"; Flags: ignoreversion recursesubdirs
+Source: "..\.Defaults\Tests\*"; DestDir: "{userappdata}\TiXL-RU\Tests"; Excludes: "*.proxy.mov,*.waveform.png,*.waveform.jpg,win-x86,win-arm64,osx*,linux-*,android*,ios,maccatalyst-*,unix"; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

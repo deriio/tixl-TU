@@ -106,14 +106,17 @@ public static string TestReferencesFolder => Path.Combine(".tixl", TestsSubFolde
     /// </summary>
     public static readonly string VersionedAppFolderName = ResolveVersionedAppFolderName();
 
+    private const string BuildFlavor = "RU";
+
     private static string ResolveVersionedAppFolderName()
     {
         if (VersionIdOverride != null)
             return $"{AppSubFolder}{TixlVersion}-{VersionIdOverride}";
 
+        // The Russian-UI build keeps its own settings and projects so it can run next to the official TiXL.
         return RuntimeAssemblies.IsPreview
-                   ? $"{AppSubFolder}{TixlVersion}-{RuntimeAssemblies.VersionSuffix}"
-                   : $"{AppSubFolder}{TixlVersion}";
+                   ? $"{AppSubFolder}{TixlVersion}-{RuntimeAssemblies.VersionSuffix}-{BuildFlavor}"
+                   : $"{AppSubFolder}{TixlVersion}-{BuildFlavor}";
     }
 
     /// <summary>
