@@ -1,0 +1,40 @@
+name: Release (Russian UI)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - claude/wonderful-galileo-82jm76
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build
+        uses: ./.github/actions/build
+
+      - name: Package
+        uses: ./.github/actions/package
+
+      - name: Upload Installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: installer
+          path: Installer\Output\*.exe
+
+      - name: Publish Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ru-ui-${{ github.run_number }}
+          name: TiXL с русским интерфейсом (сборка ${{ github.run_number }})
+          body: |
+            Сборка TiXL с поддержкой русского языка интерфейса.
+            Включение: Settings → Interface → Language → «Русский».
+          files: Installer\Output\*.exe
+          prerelease: true
