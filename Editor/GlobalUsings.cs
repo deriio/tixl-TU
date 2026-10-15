@@ -5,3 +5,4 @@ global using System.Collections.Generic;
 global using System.Linq;
 global using System.Numerics;
 global using T3.Core.Logging;
+global using T3.Editor.Gui.Localization;

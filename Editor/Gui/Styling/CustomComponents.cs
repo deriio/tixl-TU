@@ -68,7 +68,7 @@ internal static partial class CustomComponents
     {
         ImGui.PushFont(Fonts.FontSmall);
         ImGui.PushStyleColor(ImGuiCol.Text, UiColors.TextMuted.Rgba);
-        ImGui.TextWrapped(text);
+        ImGui.TextWrapped(Loc.T(text));
         ImGui.PopStyleColor();
         ImGui.PopFont();
         ImGui.Dummy(new Vector2(0, 4 * T3Ui.UiScaleFactor));
@@ -79,7 +79,7 @@ internal static partial class CustomComponents
         FormInputs.AddVerticalSpace(5);
         ImGui.PushFont(Fonts.FontSmall);
         ImGui.PushStyleColor(ImGuiCol.Text, UiColors.TextMuted.Rgba);
-        ImGui.TextUnformatted(text.ToUpperInvariant());
+        ImGui.TextUnformatted(Loc.T(text).ToUpperInvariant());
         ImGui.PopStyleColor();
         ImGui.PopFont();
         FormInputs.AddVerticalSpace(2);

@@ -26,7 +26,7 @@ internal static class FormInputs
     {
         //AddVerticalSpace(1);
         ImGui.PushFont(Fonts.FontLarge);
-        ImGui.Text(label);
+        ImGui.Text(Loc.T(label));
         ImGui.PopFont();
         //AddVerticalSpace(20);
     }
@@ -44,7 +44,7 @@ internal static class FormInputs
         ImGui.PushFont(Fonts.FontBold);
 
         AddVerticalSpace(15 * T3Ui.UiScaleFactor);
-        ImGui.TextUnformatted(label);
+        ImGui.TextUnformatted(Loc.T(label));
         AddVerticalSpace(5 * T3Ui.UiScaleFactor);
         ImGui.PopFont();
         ImGui.PopStyleColor();
@@ -809,7 +809,8 @@ internal static class FormInputs
         var boxSize = MathF.Round(h * 0.8f);
 
         var hasLabel = !string.IsNullOrEmpty(label) && !label.StartsWith("##");
-        var labelSize = hasLabel ? ImGui.CalcTextSize(label) : Vector2.Zero;
+        var displayLabel = hasLabel ? Loc.T(label) : label;
+        var labelSize = hasLabel ? ImGui.CalcTextSize(displayLabel) : Vector2.Zero;
         var spacing = hasLabel ? 8 * scale : 0;
 
         var id = string.IsNullOrEmpty(label) ? "##checkbox" : label;
@@ -836,7 +837,7 @@ internal static class FormInputs
         if (hasLabel)
         {
             var textPos = new Vector2(boxMax.X + spacing, min.Y + (h - labelSize.Y) * 0.5f);
-            dl.AddText(textPos, ImGui.GetColorU32(UiColors.Text.Rgba), label);
+            dl.AddText(textPos, ImGui.GetColorU32(UiColors.Text.Rgba), displayLabel);
         }
 
         return clicked;
@@ -855,7 +856,7 @@ internal static class FormInputs
         AddIcon(Icon.Tip);
 
         ImGui.SameLine();
-        ImGui.TextWrapped(label);
+        ImGui.TextWrapped(Loc.T(label));
         //ImGui.Indent(-13);
         ImGui.PopStyleVar(2);
     }
@@ -916,6 +917,7 @@ internal static class FormInputs
         if (string.IsNullOrEmpty(label) || label.StartsWith("##"))
             return;
 
+        label = Loc.T(label);
         var labelSize = ImGui.CalcTextSize(label);
         var p = ImGui.GetCursorPos();
         ImGui.SetCursorPosX(MathF.Max(LeftParameterPadding - labelSize.X, 0) + 10);
@@ -1139,7 +1141,7 @@ internal static class FormInputs
         // stick. A stable wrap width (inner width minus padding and a scrollbar's worth of slack) keeps
         // the layout from reflowing, so the spurious bar disappears on the next frame.
         var innerWrap = width - 2 * 10 * scale - ImGui.GetStyle().ScrollbarSize;
-        _tooltipMarkdown.Draw(tooltip, wrapWidthPx: innerWrap);
+        _tooltipMarkdown.Draw(Loc.T(tooltip), wrapWidthPx: innerWrap);
         ImGui.EndTooltip();
         ImGui.PopStyleVar(2);
         ImGui.PopStyleColor();

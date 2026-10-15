@@ -61,7 +61,7 @@ internal sealed partial class SettingsWindow : Window
             foreach (var category in Enum.GetValues<Categories>())
             {
                 var name = CustomComponents.HumanReadablePascalCase(Enum.GetName(category));
-                if (NavigationSidebar.Item(name, _activeCategory == category))
+                if (NavigationSidebar.Item(Loc.T(name), _activeCategory == category))
                     _activeCategory = category;
             }
 
@@ -69,7 +69,7 @@ internal sealed partial class SettingsWindow : Window
         }
         NavigationSidebar.EndColumn();
 
-        NavigationSidebar.BeginContentPanel(CategoryTitle(_activeCategory), this);
+        NavigationSidebar.BeginContentPanel(Loc.T(CategoryTitle(_activeCategory)), this);
         {
             FormInputs.SetIndentToParameters();
             switch (_activeCategory)
@@ -79,6 +79,12 @@ internal sealed partial class SettingsWindow : Window
 
                     FormInputs.AddVerticalSpace();
                     FormInputs.SetIndentToParameters();
+                    changed |= FormInputs.AddEnumDropdown(ref UserSettings.Config.UiLanguage,
+                                                          "Language",
+                                                          "Language of the editor interface. Untranslated texts stay in English.",
+                                                          UserSettings.Defaults.UiLanguage,
+                                                          itemLabel: LanguageName);
+
                     changed |= FormInputs.AddFloat("UI Scale",
                                                    ref UserSettings.Config.UiScaleFactor,
                                                    0.1f, 5f, 0.01f, true, true,
@@ -604,6 +610,12 @@ internal sealed partial class SettingsWindow : Window
         }
         NavigationSidebar.EndContentPanel();
     }
+
+    private static string LanguageName(UiLanguages language) => language switch
+                                                                     {
+                                                                         UiLanguages.Russian => "Русский",
+                                                                         _                   => "English",
+                                                                     };
 
     private static string CategoryTitle(Categories category) => category switch
                                                                     {

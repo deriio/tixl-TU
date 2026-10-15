@@ -488,7 +488,7 @@ internal static class AppMenuBar
             ImGui.EndMenu();
         }
 
-        if (ImGui.BeginMenu("Edit"))
+        if (ImGui.BeginMenu(Loc.WithStableId("Edit")))
         {
             UserSettings.Config.ShowMainMenu = true;
             if (MenuItem("Undo", "CTRL+Z", isEnabled: UndoRedoStack.CanUndo))
@@ -537,7 +537,7 @@ internal static class AppMenuBar
             ImGui.EndMenu();
         }
 
-        if (ImGui.BeginMenu("View"))
+        if (ImGui.BeginMenu(Loc.WithStableId("View")))
         {
             UserSettings.Config.ShowMainMenu = true;
 
@@ -567,13 +567,13 @@ internal static class AppMenuBar
             ImGui.EndMenu();
         }
 
-        if (ImGui.BeginMenu("Windows"))
+        if (ImGui.BeginMenu(Loc.WithStableId("Windows")))
         {
             WindowManager.DrawWindowMenuContent();
             ImGui.EndMenu();
         }
 
-        if (ImGui.BeginMenu("Help"))
+        if (ImGui.BeginMenu(Loc.WithStableId("Help")))
         {
             if (MenuItem(RuntimeAssemblies.IsAlpha ? "Welcome to Alpha" : "Welcome"))
             {

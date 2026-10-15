@@ -61,7 +61,7 @@ internal static partial class CustomComponents
         ImGui.SetCursorPosX(ImGui.GetCursorPosX() + ImGui.GetStyle().ItemSpacing.X + Icons.FontSize * 1.4f);
         ImGui.PushFont(Fonts.FontSmall);
         ImGui.PushStyleColor(ImGuiCol.Text, UiColors.TextMuted.Rgba);
-        ImGui.TextUnformatted(label);
+        ImGui.TextUnformatted(Loc.T(label));
         ImGui.PopStyleColor();
         ImGui.PopFont();
     }
@@ -109,6 +109,7 @@ internal static partial class CustomComponents
                                     bool reserveCheckmarkColumn = true, bool reserveIconColumn = true,
                                     ButtonStates state = ButtonStates.Default)
     {
+        label = Loc.T(label);
         isEnabled &= !MenuItemsDisabled;
         if (MenuItemsFlushLeft)
         {
@@ -210,6 +211,7 @@ internal static partial class CustomComponents
     /// </summary>
     public static bool DrawSubMenu(int id, string label, bool isEnabled = true, bool reserveCheckmarkColumn = true)
     {
+        label = Loc.T(label);
         if (MenuItemsFlushLeft)
             reserveCheckmarkColumn = false;
 

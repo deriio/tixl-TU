@@ -37,10 +37,10 @@ internal static partial class CustomComponents
             return;
 
         BeginTooltip();
-        ImGui.TextColored(color, message);
+        ImGui.TextColored(color, Loc.T(message));
         if (!string.IsNullOrEmpty(additionalNotes))
         {
-            ImGui.TextColored(color.Fade(0.7f), additionalNotes);
+            ImGui.TextColored(color.Fade(0.7f), Loc.T(additionalNotes));
         }
 
         ImGui.PopTextWrapPos();

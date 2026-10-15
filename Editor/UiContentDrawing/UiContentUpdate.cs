@@ -96,6 +96,7 @@ internal static class UiContentUpdate
         _extendedGlyphRanges = new ushort[]
                                    {
                                        0x0020, 0x00FF,   // Basic Latin + Latin Supplement
+                                       0x0400, 0x04FF,   // Cyrillic (Russian UI)
                                        0x2010, 0x205E,   // General punctuation
                                        0x2190, // ←
                                        0x21FF, // ⇿  

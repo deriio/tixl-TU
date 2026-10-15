@@ -6,6 +6,7 @@ using T3.Core.Animation;
 using T3.Core.IO;
 using T3.Core.Settings;
 using T3.Editor.Compilation;
+using T3.Editor.Gui.Localization;
 using T3.Editor.Gui.Windows;
 using T3.Editor.Gui.Windows.RenderExport;
 using T3.Editor.Gui.Windows.TimeLine;
@@ -99,6 +100,9 @@ public sealed class UserSettings : Settings<UserSettings.ConfigData>
         public bool ShowWelcomeOnStartup = true;
 
         // UI-State
+        [JsonConverter(typeof(StringEnumConverter))]
+        public UiLanguages UiLanguage = UiLanguages.English;
+
         public float UiScaleFactor = 1;
         public bool FullScreen = false;
         public int WindowLayoutIndex = 0;

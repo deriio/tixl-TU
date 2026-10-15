@@ -392,9 +392,12 @@ internal static partial class CustomComponents
     
     internal static bool DrawCtaButton(string label, Icon icon, Color textColor, Color bgColor, Color borderColor)
     {
+        // Keep the English label as id so the button stays stable across languages.
+        var id = label;
+        label = Loc.T(label);
         var size = GetCtaButtonSize(label, icon);
 
-        var clicked = ImGui.InvisibleButton(label, size);
+        var clicked = ImGui.InvisibleButton(id, size);
         var min = ImGui.GetItemRectMin();
         var max = ImGui.GetItemRectMax();
         var dl = ImGui.GetWindowDrawList();
